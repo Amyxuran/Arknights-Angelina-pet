@@ -12,20 +12,27 @@
 - Apple Silicon Mac
 - 不需要录屏、通知和辅助功能权限
 
+## 测试版下载
+
+[下载酸橙信使 2.0.0 测试版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.0/LimeCourier-2.0.0-macos-arm64-development.zip)
+
+[下载 SHA-256 校验文件](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.0/LimeCourier-2.0.0-macos-arm64-development.zip.sha256)
+
+当前仓库为私有仓库。下载者需要登录已获得仓库访问权限的 GitHub 账号。
+
 ## 安装
 
-1. 打开仓库的 **Releases** 页面。
-2. 下载 `LimeCourier-<版本>-macos-arm64.zip` 和同名 `.sha256` 文件。
-3. 在下载目录执行校验：
+1. 下载测试版 ZIP 和同名 `.sha256` 文件。
+2. 在下载目录执行校验：
 
 ```bash
-shasum -a 256 -c LimeCourier-<版本>-macos-arm64.zip.sha256
+shasum -a 256 -c LimeCourier-2.0.0-macos-arm64-development.zip.sha256
 ```
 
-4. 解压 ZIP，将“酸橙信使.app”拖入“应用程序”文件夹。
-5. 双击启动。应用通过菜单栏图标和角色右键菜单进行控制。
+3. 解压 ZIP，将“酸橙信使.app”拖入“应用程序”文件夹。
+4. 双击启动。应用通过菜单栏图标和角色右键菜单进行控制。
 
-GitHub Release 中提供的安装包经过 Developer ID 签名和 Apple 公证。
+测试版使用开发测试签名，未经过 Apple 公证。首次启动被 macOS 阻止后，打开“系统设置 > 隐私与安全性”，点击“仍要打开”。仅在确认安装包来自本仓库时执行此操作。
 
 ## 互动
 
