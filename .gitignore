@@ -1,0 +1,12 @@
+.DS_Store
+.build/
+.swiftpm/
+dist/
+logs/
+视觉验收*/
+
+# Only the three UI images referenced by the production app are published.
+UI素材/*
+!UI素材/7.png
+!UI素材/22.png
+!UI素材/23.png
