@@ -8,6 +8,7 @@ final class AppController: ObservableObject {
     private let statusMenu: StatusMenuController
     @Published private(set) var isPetVisible = true
     @Published private(set) var petStatus = "休息中 · 坐坐"
+    var onQuit: (() -> Void)?
 
     init() {
         let preferences = AppPreferences()
@@ -34,12 +35,17 @@ final class AppController: ObservableObject {
         publishPetState()
     }
 
+    func quit() {
+        onQuit?()
+    }
+
     private func wireActions() {
         petWindow.contextMenuProvider = { [weak self] in
             self?.statusMenu.makeContextMenu() ?? NSMenu()
         }
         petWindow.onStateChanged = { [weak self] in
             self?.publishPetState()
+            self?.statusMenu.refresh()
         }
         statusMenu.isPetVisible = { [weak self] in self?.petWindow.isVisible ?? false }
         statusMenu.petStatus = { [weak self] in self?.petWindow.statusTitle ?? "休息中 · 坐坐" }
@@ -47,7 +53,10 @@ final class AppController: ObservableObject {
             self?.togglePetVisibility()
         }
         statusMenu.onResetPosition = { [weak self] in self?.resetPetPosition() }
-        statusMenu.onQuit = { NSApp.terminate(nil) }
+        statusMenu.onQuit = { [weak self] in
+            self?.onQuit?()
+        }
+        statusMenu.refresh()
         publishPetState()
     }
 
@@ -118,7 +127,7 @@ final class AppController: ObservableObject {
             } catch {
                 NSLog("Visual QA failed: %@", error.localizedDescription)
             }
-            NSApp.terminate(nil)
+            self.onQuit?()
         }
     }
 

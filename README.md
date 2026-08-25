@@ -14,7 +14,7 @@
 
 ## 测试版下载
 
-[下载酸橙信使 2.0.0 测试版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.0/LimeCourier-2.0.0-macos-arm64-development.zip)
+[下载酸橙信使 2.0.1 测试版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.1/LimeCourier-2.0.1-macos-arm64-development.zip)
 
 ## 安装
 
