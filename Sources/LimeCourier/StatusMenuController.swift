@@ -15,8 +15,10 @@ final class StatusMenuController: NSObject {
 
     init(preferences: AppPreferences) {
         self.preferences = preferences
-        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        statusItem = NSStatusBar.system.statusItem(withLength: 20)
         super.init()
+        statusItem.autosaveName = "com.ranxu.LimeCourier.statusItem"
+        statusItem.isVisible = true
         configureStatusButton()
         statusItem.menu = makeMenu()
         preferences.objectWillChange
@@ -39,13 +41,15 @@ final class StatusMenuController: NSObject {
         guard let button = statusItem.button else { return }
         if let url = ResourceLocator.url(for: "23", extension: "png", subdirectory: "UI素材"),
            let image = NSImage(contentsOf: url) {
-            image.size = NSSize(width: 20, height: 20)
+            image.size = NSSize(width: 16, height: 18)
             image.isTemplate = false
             button.image = image
         } else {
             button.image = NSImage(systemSymbolName: "figure.wave", accessibilityDescription: "酸橙信使")
             button.image?.isTemplate = true
         }
+        button.imagePosition = .imageOnly
+        button.imageScaling = .scaleProportionallyDown
         button.toolTip = "酸橙信使"
     }
 
