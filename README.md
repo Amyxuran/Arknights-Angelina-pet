@@ -4,7 +4,7 @@
 
 ![桌面宠物展示](docs/images/desktop-pet.png)
 
-> 本项目是非官方同人作品。公开分发当前《明日方舟》角色与活动素材前，发布者必须取得相应转载和再分发授权。具体边界见 [第三方素材声明](THIRD_PARTY_NOTICES.md)。
+> 本项目是非官方、非商业同人作品，使用《明日方舟》“直到大地变成一颗酸橙”活动官方发布的素材文件制作，与《明日方舟》官方不存在隶属、授权或背书关系。相关角色、美术、商标及其他知识产权归各自权利人所有，详见 [第三方素材声明](THIRD_PARTY_NOTICES.md)。
 
 ## 系统要求
 
@@ -25,7 +25,7 @@ shasum -a 256 -c LimeCourier-<版本>-macos-arm64.zip.sha256
 4. 解压 ZIP，将“酸橙信使.app”拖入“应用程序”文件夹。
 5. 双击启动。应用通过菜单栏图标和角色右键菜单进行控制。
 
-GitHub Release 中的正式安装包必须使用 Developer ID 签名并通过 Apple 公证。源码直接构建的临时签名版本仅用于开发测试。
+GitHub Release 中提供的安装包经过 Developer ID 签名和 Apple 公证。
 
 ## 互动
 
@@ -46,19 +46,3 @@ GitHub Release 中的正式安装包必须使用 Developer ID 签名并通过 Ap
 ## 控制菜单
 
 右键角色与菜单栏图标打开同一菜单。菜单包含显示状态、自主活动、鼠标追随、边缘气泡、始终置顶、待机动作、角色大小、动画速度、开机启动、重置位置和退出。
-
-## 源码构建
-
-```bash
-swift test
-./scripts/build_app.sh
-open "dist/酸橙信使.app"
-```
-
-构建环境需要 Xcode 16 与 Swift 6。开发构建产物位于 `dist/酸橙信使.app`。
-
-## 正式发布
-
-完整的 Developer ID 签名、Apple 公证、GitHub Secrets 与标签发布步骤见 [GitHub 发布方案](PUBLISHING.md)。工作流根据 `v*` 标签自动创建 GitHub Release，上传经过公证的 ZIP 和 SHA-256 校验文件。
-
-官方参考：[GitHub Releases](https://docs.github.com/en/repositories/releasing-projects-on-github)、[Apple Developer ID](https://developer.apple.com/support/developer-id/)、[Apple 公证流程](https://developer.apple.com/documentation/security/notarizing-macos-software-before-distribution)。
