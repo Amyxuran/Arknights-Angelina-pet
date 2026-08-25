@@ -1,9 +1,11 @@
 import AppKit
+import Combine
 
 @MainActor
 final class StatusMenuController: NSObject {
     private let preferences: AppPreferences
     private let statusItem: NSStatusItem
+    private var cancellables = Set<AnyCancellable>()
 
     var isPetVisible: (() -> Bool)?
     var petStatus: (() -> String)?
@@ -19,6 +21,12 @@ final class StatusMenuController: NSObject {
         statusItem.isVisible = true
         configureStatusButton()
         statusItem.menu = makeMenu()
+        preferences.objectWillChange
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                DispatchQueue.main.async { self?.refresh() }
+            }
+            .store(in: &cancellables)
     }
 
     func makeContextMenu() -> NSMenu {

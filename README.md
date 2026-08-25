@@ -21,11 +21,11 @@
 
 ### Windows
 
-[下载酸橙信使 2.0.1 Windows 版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.1/LimeCourier-Windows-x64.zip)
+[下载酸橙信使 2.0.2 Windows 版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.2/LimeCourier-Windows-x64.zip)
 
 ### macOS
 
-[下载酸橙信使 2.0.1 macOS 版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.1/LimeCourier-2.0.1-macos-arm64-development.zip)
+[下载酸橙信使 2.0.2 macOS 版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.2/LimeCourier-2.0.2-macos-arm64-development.zip)
 
 ## 安装
 
