@@ -1,10 +1,13 @@
 import AppKit
+import Combine
 
 @MainActor
-final class AppController {
+final class AppController: ObservableObject {
     let preferences: AppPreferences
     let petWindow: PetWindowController
     private let statusMenu: StatusMenuController
+    @Published private(set) var isPetVisible = true
+    @Published private(set) var petStatus = "休息中 · 坐坐"
 
     init() {
         let preferences = AppPreferences()
@@ -21,20 +24,36 @@ final class AppController {
         preferences.savePetOrigin(petWindow.persistedOrigin)
     }
 
+    func togglePetVisibility() {
+        petWindow.isVisible ? petWindow.hide() : petWindow.show()
+        publishPetState()
+    }
+
+    func resetPetPosition() {
+        petWindow.resetPosition()
+        publishPetState()
+    }
+
     private func wireActions() {
         petWindow.contextMenuProvider = { [weak self] in
             self?.statusMenu.makeContextMenu() ?? NSMenu()
         }
-        petWindow.onStateChanged = { [weak self] in self?.statusMenu.refresh() }
+        petWindow.onStateChanged = { [weak self] in
+            self?.publishPetState()
+        }
         statusMenu.isPetVisible = { [weak self] in self?.petWindow.isVisible ?? false }
         statusMenu.petStatus = { [weak self] in self?.petWindow.statusTitle ?? "休息中 · 坐坐" }
         statusMenu.onTogglePet = { [weak self] in
-            guard let self else { return }
-            self.petWindow.isVisible ? self.petWindow.hide() : self.petWindow.show()
+            self?.togglePetVisibility()
         }
-        statusMenu.onResetPosition = { [weak self] in self?.petWindow.resetPosition() }
+        statusMenu.onResetPosition = { [weak self] in self?.resetPetPosition() }
         statusMenu.onQuit = { NSApp.terminate(nil) }
-        statusMenu.refresh()
+        publishPetState()
+    }
+
+    private func publishPetState() {
+        isPetVisible = petWindow.isVisible
+        petStatus = petWindow.statusTitle
     }
 
     private func runVisualQAIfRequested() {

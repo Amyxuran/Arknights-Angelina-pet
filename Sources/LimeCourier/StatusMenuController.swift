@@ -1,11 +1,8 @@
 import AppKit
-import Combine
 
 @MainActor
 final class StatusMenuController: NSObject {
     private let preferences: AppPreferences
-    private let statusItem: NSStatusItem
-    private var cancellables = Set<AnyCancellable>()
 
     var isPetVisible: (() -> Bool)?
     var petStatus: (() -> String)?
@@ -15,42 +12,11 @@ final class StatusMenuController: NSObject {
 
     init(preferences: AppPreferences) {
         self.preferences = preferences
-        statusItem = NSStatusBar.system.statusItem(withLength: 20)
         super.init()
-        statusItem.autosaveName = "com.ranxu.LimeCourier.statusItem"
-        statusItem.isVisible = true
-        configureStatusButton()
-        statusItem.menu = makeMenu()
-        preferences.objectWillChange
-            .receive(on: RunLoop.main)
-            .sink { [weak self] _ in
-                DispatchQueue.main.async { self?.refresh() }
-            }
-            .store(in: &cancellables)
     }
 
     func makeContextMenu() -> NSMenu {
         makeMenu()
-    }
-
-    func refresh() {
-        statusItem.menu = makeMenu()
-    }
-
-    private func configureStatusButton() {
-        guard let button = statusItem.button else { return }
-        if let url = ResourceLocator.url(for: "23", extension: "png", subdirectory: "UI素材"),
-           let image = NSImage(contentsOf: url) {
-            image.size = NSSize(width: 16, height: 18)
-            image.isTemplate = false
-            button.image = image
-        } else {
-            button.image = NSImage(systemSymbolName: "figure.wave", accessibilityDescription: "酸橙信使")
-            button.image?.isTemplate = true
-        }
-        button.imagePosition = .imageOnly
-        button.imageScaling = .scaleProportionallyDown
-        button.toolTip = "酸橙信使"
     }
 
     private func makeMenu() -> NSMenu {
@@ -137,31 +103,28 @@ final class StatusMenuController: NSObject {
         return menuItem
     }
 
-    @objc private func togglePet() { onTogglePet?(); refresh() }
-    @objc private func toggleAutonomous() { preferences.autonomousEnabled.toggle(); refresh() }
-    @objc private func toggleMouseFollow() { preferences.mouseFollowEnabled.toggle(); refresh() }
-    @objc private func toggleEdgeHide() { preferences.edgeHideEnabled.toggle(); refresh() }
-    @objc private func toggleAlwaysOnTop() { preferences.alwaysOnTop.toggle(); refresh() }
-    @objc private func toggleLaunchAtLogin() { preferences.launchAtLogin.toggle(); refresh() }
-    @objc private func resetPosition() { onResetPosition?(); refresh() }
+    @objc private func togglePet() { onTogglePet?() }
+    @objc private func toggleAutonomous() { preferences.autonomousEnabled.toggle() }
+    @objc private func toggleMouseFollow() { preferences.mouseFollowEnabled.toggle() }
+    @objc private func toggleEdgeHide() { preferences.edgeHideEnabled.toggle() }
+    @objc private func toggleAlwaysOnTop() { preferences.alwaysOnTop.toggle() }
+    @objc private func toggleLaunchAtLogin() { preferences.launchAtLogin.toggle() }
+    @objc private func resetPosition() { onResetPosition?() }
     @objc private func quit() { onQuit?() }
 
     @objc private func selectSize(_ sender: NSMenuItem) {
         guard let value = sender.representedObject as? NSNumber else { return }
         preferences.petSize = AppPreferences.normalizedSize(value.doubleValue)
-        refresh()
     }
 
     @objc private func selectSpeed(_ sender: NSMenuItem) {
         guard let value = sender.representedObject as? NSNumber else { return }
         preferences.animationSpeed = AppPreferences.normalizedSpeed(value.doubleValue)
-        refresh()
     }
 
     @objc private func selectStandbyAction(_ sender: NSMenuItem) {
         guard let rawValue = sender.representedObject as? String,
               let action = PetSelectableAction(rawValue: rawValue) else { return }
         preferences.selectedStandbyAction = action
-        refresh()
     }
 }
