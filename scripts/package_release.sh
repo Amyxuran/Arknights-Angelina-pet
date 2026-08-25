@@ -43,10 +43,4 @@ spctl --assess --type execute --verbose=4 "$APP_DIR"
 
 rm -f "$ASSET_PATH"
 ditto -c -k --sequesterRsrc --keepParent "$APP_DIR" "$ASSET_PATH"
-(
-  cd "$RELEASE_DIR"
-  shasum -a 256 "$ASSET_NAME" > "$ASSET_NAME.sha256"
-)
-
 print "$ASSET_PATH"
-print "$ASSET_PATH.sha256"
