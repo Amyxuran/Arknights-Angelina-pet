@@ -1,28 +1,46 @@
 # 酸橙信使
 
-一款轻量 macOS 桌面宠物。角色常驻桌面上层，根据鼠标悬浮、点击、长按、拖动、鼠标追随和屏幕边缘吸附播放对应动画。
+一款轻量桌面宠物，支持 macOS 与 Windows。角色常驻桌面上层，根据鼠标悬浮、点击、长按、拖动、鼠标追随和屏幕边缘吸附播放对应动画。
 
 ![桌面宠物展示](docs/images/desktop-pet.png)
 
-> 本项目是非官方、非商业同人作品，使用《明日方舟》“直到大地变成一颗酸橙”活动官方发布的素材文件制作，与《明日方舟》官方不存在隶属、授权或背书关系。相关角色、美术、商标及其他知识产权归各自权利人所有。
+> 本项目是非官方、非商业同人作品，使用《明日方舟》“直到大地变成一颗酸橙”活动官方发布的素材文件制作，欢迎广大舟友们一起二创修改。
 
 ## 系统要求
 
+### macOS
+
 - macOS 14.0 及更高版本
 - Apple Silicon Mac
-- 不需要录屏、通知和辅助功能权限
+
+### Windows
+
+- Windows 10/11（64 位）
 
 ## 测试版下载
 
-[下载酸橙信使 2.0.1 测试版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.1/LimeCourier-2.0.1-macos-arm64-development.zip)
+### Windows
+
+[下载酸橙信使 2.0.1 Windows 版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.1/LimeCourier-Windows-x64.zip)
+
+### macOS
+
+[下载酸橙信使 2.0.1 macOS 版](https://github.com/Amyxuran/Arknights-Angelina-pet/releases/download/test-v2.0.1/LimeCourier-2.0.1-macos-arm64-development.zip)
 
 ## 安装
+
+### Windows
+
+1. 下载并解压 ZIP。
+2. 运行 `LimeCourier.exe`。
+
+### macOS
 
 1. 下载并解压测试版 ZIP。
 2. 将“酸橙信使.app”拖入“应用程序”文件夹。
 3. 双击启动。应用通过菜单栏图标和角色右键菜单进行控制。
 
-测试版使用开发测试签名，未经过 Apple 公证。首次启动被 macOS 阻止后，打开“系统设置 > 隐私与安全性”，点击“仍要打开”。仅在确认安装包来自本仓库时执行此操作。
+macOS 测试版使用开发测试签名，未经过 Apple 公证。首次启动被 macOS 阻止后，打开“系统设置 > 隐私与安全性”，点击“仍要打开”。仅在确认安装包来自本仓库时执行此操作。
 
 ## 互动
 
